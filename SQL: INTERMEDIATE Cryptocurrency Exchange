@@ -1,0 +1,40 @@
+SELECT *
+FROM transactions;
+
+--What is the total money_in in the table?
+select sum(money_in)
+from transactions;
+
+--What is the total money_out in the table?
+select sum(money_out)
+from transactions;
+
+--How many money_in transactions are in this table?
+select count(money_in)
+from transactions;
+
+--How many money_in transactions are in this table where ‘BIT’ is the currency?
+select count(money_in)
+from transactions
+where currency = 'BIT';
+
+--What was the largest transaction in this whole table?
+select max(money_in),max(money_out)
+from transactions;
+
+--What is the average money_in in the table for the currency Ethereum (‘ETH’)?
+select avg(money_in)
+from transactions
+where currency = 'ETH';
+
+--Select date, average money_in, and average money_out from the table And group everything by date.
+
+select date, avg(money_in), avg(money_out)
+from transactions
+group by date;
+
+--To make the previous query easier to read, round the averages to 2 decimal places.
+select date, round(avg(money_in),2) as 'Avg Money_in', round(avg(money_out),2) as 'Avg Money_Out'
+from transactions
+group by date;
+
