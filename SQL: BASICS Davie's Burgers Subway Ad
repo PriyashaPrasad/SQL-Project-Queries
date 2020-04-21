@@ -1,0 +1,49 @@
+ SELECT *
+FROM orders
+LIMIT 10;
+
+--Use DISTINCT to find out all the unique order_date values in this table.
+
+SELECT DISTINCT order_date
+FROM orders
+ORDER BY order_date DESC;
+
+--Instead of selecting all the columns using *, write a query that selects only the special_instructions column.
+
+select special_instructions
+from orders
+limit 20;
+
+-- returning the special instructions that are not empty?
+select special_instructions
+from orders
+where special_instructions is not null;
+
+-- instructions in alphabetical order (A-Z).
+select special_instructions
+from orders
+where special_instructions is not null
+order by special_instructions asc;
+
+--Let’s search for special instructions that have the word ‘sauce’.
+select special_instructions
+from orders
+where special_instructions like '%sauce%';
+
+
+--Let’s search for special instructions that have the word ‘door’.
+
+select special_instructions
+from orders
+where special_instructions like '%door%';
+
+
+select special_instructions
+from orders
+where special_instructions like '%box%';
+
+-- Instead of just returning the special instructions, also return their order ids.
+
+select special_instructions as 'Notes', id as '#'
+from orders
+where special_instructions like '%box%';
