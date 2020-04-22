@@ -1,0 +1,65 @@
+SELECT * FROM trips;
+SELECT * FROM riders;
+SELECT * FROM cars;
+
+/*The primary key of trips is id.
+
+The primary key of riders is id.
+
+The primary key of cars is id.
+
+They have the same name, but they are very different*/
+
+--Try out a simple cross join between riders and cars.
+SELECT *
+FROM riders
+CROSS JOIN cars;
+
+--Find the columns to join between trips and riders and combine the two tables using a LEFT JOIN.
+select trips.id, riders.username
+from trips
+left join riders 
+on trips.rider_id = riders.id;
+
+--Find the columns to join on and combine the trips and cars table using an INNER JOIN.
+
+select *
+from trips
+join cars 
+on trips.car_id = cars.id;
+
+--Stack the riders table on top of the new table named riders2.
+
+select *
+from riders
+union
+select *
+from riders2;
+
+--What is the average cost for a trip?
+
+select avg(cost)
+from trips;
+
+--Find all the riders who have used REBU less than 500 times!
+
+select *
+from riders
+where total_trips < 500
+union
+select *
+from riders2
+where total_trips < 500;
+
+--Calculate the number of cars that are active.
+select count(*)
+from cars
+where status = 'active';
+
+--Write a query that finds the two cars that have the highest trips_completed.
+
+select *
+from cars
+order by trips_completed desc
+limit 2;
+
