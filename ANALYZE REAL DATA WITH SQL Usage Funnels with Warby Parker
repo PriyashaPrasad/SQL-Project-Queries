@@ -1,0 +1,51 @@
+ -- Select all columns from the first 10 rows. What columns does the table have?
+ 
+ select *
+ from survey
+ limit 10;
+ 
+--What is the number of responses for each question?
+
+select question, count (distinct user_id)
+from survey
+group by question;
+
+--Which question(s) of the quiz have a lower completion rates?
+-- What do you think is the reason?
+
+--We divide the number of people completing each step by the number of people completing the previous step:
+
+/*1 - 100%
+2 - 95%
+3 - 80%
+4 - 95%
+5 - 75%*/
+
+-- the fifth question has the lower completion rates,it could be because of the customers not remembering exactly the date of their last eye exam.
+ 
+ -- Examine the first five rows of each table
+ 
+SELECT *
+FROM quiz
+LIMIT 5;
+
+SELECT *
+FROM home_try_on
+LIMIT 5;
+
+SELECT *
+FROM purchase
+LIMIT 5;
+
+SELECT DISTINCT q.user_id,
+   h.user_id IS NOT NULL AS 'is_home_try_on',
+   h.number_of_pairs,
+   p.user_id IS NOT NULL AS 'is_purchase'
+FROM quiz q
+LEFT JOIN home_try_on h
+   ON q.user_id = h.user_id
+LEFT JOIN purchase p
+   ON p.user_id = q.user_id
+LIMIT 10;
+
+
